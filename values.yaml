@@ -5,14 +5,14 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-nameOverride: ""
-fullnameOverride: ""
-matomoUsername:
-matomoPassword:
-matomoEmail:
+#nameOverride: ""
+#fullnameOverride: ""
+#matomoUsername: admin
+#matomoPassword: admin
+#matomoEmail:
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
 
 ingress:
@@ -30,7 +30,7 @@ volumeClaim:
   accessModes:
     - ReadWriteOnce
   size: 1Gi
-  storageClass: default
+  storageClass: rook-ceph-block
 
 smtp:
   enabled: false
@@ -62,6 +62,7 @@ mariadb:
   master:
     persistence:
       size: 5Gi
+      storageClass: rook-ceph-block
     config: |-
       [mysqld]
       skip-name-resolve
